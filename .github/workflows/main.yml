@@ -40,10 +40,22 @@ jobs:
           cd build
           ninja
 
+      - name: Generate CPackConfig
+        run: |
+          cat << 'EOF' > build/CPackConfig.cmake
+          set(CPACK_PACKAGE_NAME "librecad")
+          set(CPACK_PACKAGE_VERSION "2.2.0")
+          set(CPACK_PACKAGE_CONTACT "LibreCAD Team")
+          set(CPACK_DEBIAN_PACKAGE_MAINTAINER "LibreCAD Maintainer")
+          set(CPACK_DEBIAN_PACKAGE_DEPENDS "qt6-base-dev, qt6-svg-dev, libmuparser-dev, libcgal-dev, libboost-dev")
+          include(CPack)
+          EOF
+
       - name: Create DEB package
         run: |
           cd build
-          cpack -G DEB
+          cpack -G DEB --config CPackConfig.cmake
+
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
