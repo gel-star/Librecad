@@ -20,6 +20,16 @@ jobs:
             libmuparser-dev libcgal-dev libboost-dev \
             cmake ninja-build build-essential g++ \
             dpkg-dev fakeroot
+            
+      - name: Debug directory
+        run: |
+          echo "PWD: $(pwd)"
+          echo "--- LIST ROOT ---"
+          ls -R .
+
+      - name: Find CMakeLists
+        run: |
+          find . -maxdepth 3 -name CMakeLists.txt
 
       - name: Configure build (CMake + Qt6)
         run: |
