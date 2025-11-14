@@ -43,13 +43,18 @@ jobs:
       - name: Generate CPackConfig
         run: |
           cat << 'EOF' > build/CPackConfig.cmake
+          # Package Info
           set(CPACK_PACKAGE_NAME "librecad")
           set(CPACK_PACKAGE_VERSION "2.2.0")
           set(CPACK_PACKAGE_CONTACT "LibreCAD Team")
           set(CPACK_DEBIAN_PACKAGE_MAINTAINER "LibreCAD Maintainer")
-          set(CPACK_DEBIAN_PACKAGE_DEPENDS "qt6-base-dev, qt6-svg-dev, libmuparser-dev, libcgal-dev, libboost-dev")
+
+          # Prevent CPack from writing to root "/"
+          set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
+
           include(CPack)
           EOF
+
 
       - name: Create DEB package
         run: |
