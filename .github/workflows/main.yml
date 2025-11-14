@@ -40,32 +40,9 @@ jobs:
           cd build
           ninja
 
-      - name: Generate CPackConfig
-        run: |
-          cat << 'EOF' > build/CPackConfig.cmake
-          # Package Info
-          set(CPACK_PACKAGE_NAME "librecad")
-          set(CPACK_PACKAGE_VERSION "2.2.0")
-          set(CPACK_PACKAGE_CONTACT "LibreCAD Team")
-          set(CPACK_DEBIAN_PACKAGE_MAINTAINER "LibreCAD Maintainer")
-
-          # Prevent CPack from writing to root "/"
-          set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
-
-          include(CPack)
-          EOF
-
-
-      - name: Create DEB package
-        run: |
-          cd build
-          cpack -G DEB --config CPackConfig.cmake
-
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: librecad-arm64
           path: |
             build/librecad
-            build/*.deb
