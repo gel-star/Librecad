@@ -36,22 +36,17 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=../dist
 
-      - name: Build LibreCAD
+      - name: Build
         run: |
-          cd build
-          ninja      
-          
-      - name: Debug list build directory
+          ninja -C build
+
+      - name: Install
         run: |
-          echo "--- BUILD DIR ---"
-          ls -R build
+          ninja -C build install
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: librecad-arm64
+          name: librecad-arm64-build
           path: |
-            build/librecad
-            build/plugins
-            build/resources
-            build/translations
+            dist/**
