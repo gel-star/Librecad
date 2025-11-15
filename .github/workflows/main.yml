@@ -33,12 +33,18 @@ jobs:
             -G Ninja \
             -DWITH_GUI=ON \
             -DWITH_QT6=ON \
-            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=../dist
 
       - name: Build LibreCAD
         run: |
           cd build
-          ninja
+          ninja      
+          
+      - name: Debug list build directory
+        run: |
+          echo "--- BUILD DIR ---"
+          ls -R build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
