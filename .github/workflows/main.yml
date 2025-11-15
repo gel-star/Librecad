@@ -1,4 +1,4 @@
-9name: Build LibreCAD ARM64 Qt6 + DEB
+name: Build LibreCAD ARM64 Qt6 + DEB
 
 on:
   workflow_dispatch:
