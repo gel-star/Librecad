@@ -1,4 +1,4 @@
-name: Build LibreCAD ARM64 Qt6 + DEB
+9name: Build LibreCAD ARM64 Qt6 + DEB
 
 on:
   workflow_dispatch:
@@ -46,3 +46,6 @@ jobs:
           name: librecad-arm64
           path: |
             build/librecad
+            build/plugins
+            build/resources
+            build/translations
